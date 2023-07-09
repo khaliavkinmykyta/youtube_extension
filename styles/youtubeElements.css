@@ -1,0 +1,62 @@
+.hide-yt-extension {
+    display: none;
+}
+.button-yt-extension {
+  background-color: #0f0f0f;
+  border-radius: 20px; /* Задаем радиус скругления в пикселях */
+  padding: 10px 16px; /* Задаем отступы внутри кнопки */
+  color: white;
+  font-size: 14px;
+  border: none; /* Убираем границу */
+  outline: none; /* Убираем контур при фокусе */
+  font-weight: bold;
+}
+
+.container-yt-extension {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.select-yt-extension {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+}
+
+.select-yt-extension:hover {
+  border-color: #aaa;
+}
+
+.select-yt-extension:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}
+
+.checkbox-yt-extension {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  vertical-align: middle;
+  position: relative;
+  top: 3px;
+}
+
+.checkbox-yt-extension:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.checkbox-yt-extension:checked::before {
+  content: "\2713";
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  color: #fff;
+}
