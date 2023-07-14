@@ -1,24 +1,14 @@
-function getSelectedOptionValue() {
-  let selectSpeed = document.getElementById("mySelectSpeed");
-  let selectedIndex = selectSpeed.selectedIndex;
-  let selectedOption = selectSpeed.options[selectedIndex];
-  let selectedValue = selectedOption.value;
-
-  console.log("Выбранное значение: " + selectedValue);
-}
-
+// Check YT rendering
 function checkElementRendered() {
   // Start point
   let titleElement = document.querySelector(
     "h1.style-scope.ytd-watch-metadata"
   );
+  //Check do we have Dark Theme or Not
   let darkTheme = false;
   if (titleElement) {
     let tema = document.querySelector('[content="rgba(255, 255, 255, 0.98)"]');
-    if (tema) {
-      //   alert("WHITE");
-    } else {
-      //   alert("DARK");
+    if (!tema) {
       darkTheme = true;
     }
 
@@ -38,127 +28,6 @@ function checkElementRendered() {
     });
 
     containerElement.appendChild(mainSettingButton);
-
-    // // Check box for +
-    // let checkboxInput = document.createElement("input");
-    // checkboxInput.type = "checkbox";
-    // checkboxInput.id = "myCheckbox";
-    // checkboxInput.classList.add("checkbox-yt-extension");
-    // containerElement.appendChild(checkboxInput);
-
-    // // Added label
-    // let addedLabel = document.createElement("span");
-    // addedLabel.textContent = "Added!";
-    // addedLabel.classList.add("added-label");
-    // addedLabel.style.display = "none";
-    // containerElement.appendChild(addedLabel);
-
-    // // Event listener for checkbox change
-    // checkboxInput.addEventListener("change", function () {
-    //   if (this.checked) {
-    //     addedLabel.style.display = "inline";
-    //   } else {
-    //     addedLabel.style.display = "none";
-    //   }
-    // });
-
-    /* Select rec list
-     *
-     *
-     *
-     *
-     *
-     *
-     *  Rec List
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-    Select rec list */
-
-    // Select "My recommend list"
-    // let selectElement = document.createElement("select");
-    // selectElement.id = "mySelect";
-    // selectElement.classList.add("select-yt-extension");
-
-    // // Option "My recommend list"
-    // let defaultOption = document.createElement("option");
-    // defaultOption.value = "default";
-    // defaultOption.textContent = "My recommend list";
-    // selectElement.appendChild(defaultOption);
-
-    // // Option "Study English"
-    // let option1 = document.createElement("option");
-    // option1.value = "option1";
-    // option1.textContent = "Study English";
-    // selectElement.appendChild(option1);
-
-    // // Option "Add New Playlist"
-    // let option_new = document.createElement("option");
-    // option_new.value = "add_new_playlist";
-    // option_new.textContent = "Add new playlist";
-    // selectElement.appendChild(option_new);
-
-    // // Add to container our select rec list
-    // containerElement.appendChild(selectElement);
-
-    // // Input for new option in rec list
-    // let newOptionInput = document.createElement("input");
-    // newOptionInput.classList.add("hide-yt-extension");
-    // newOptionInput.type = "text";
-    // newOptionInput.id = "newOptionInput";
-    // newOptionInput.placeholder = "Enter new option";
-    // containerElement.appendChild(newOptionInput);
-
-    // // Button to add new option
-    // let addOptionButton = document.createElement("button");
-    // addOptionButton.classList.add("hide-yt-extension");
-    // addOptionButton.textContent = "Add Option";
-    // addOptionButton.classList.add("button-yt-extension");
-    // addOptionButton.addEventListener("click", function () {
-    //   let input = document.getElementById("newOptionInput");
-    //   let value = input.value.trim();
-
-    //   if (value !== "") {
-    //     let select = document.getElementById("mySelect");
-    //     let newOption = document.createElement("option");
-    //     newOption.value = value;
-    //     newOption.textContent = value;
-    //     select.appendChild(newOption);
-    //     select.value = value;
-    //     input.value = "";
-    //     newOptionInput.classList.add("hide-yt-extension");
-    //     addOptionButton.classList.add("hide-yt-extension");
-    //     select.appendChild(option_new);
-    //   }
-    // });
-    // containerElement.appendChild(addOptionButton);
-
-    /*
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *  Speed
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     */
 
     // Select your Speed
     let selectSpeed = document.createElement("select");
@@ -185,8 +54,8 @@ function checkElementRendered() {
       let input = document.getElementById("newSpeedInput");
       let value = input.value;
 
-      if (value<=14 && value >= 0.1) {
-        console.log(value)
+      if (value <= 14 && value >= 0.1) {
+        console.log(value);
         let select = document.getElementById("mySelectSpeed");
         let newOption = document.createElement("option");
         newOption.value = value;
@@ -196,7 +65,7 @@ function checkElementRendered() {
         input.value = "";
         newSpeedInput.classList.add("hide-yt-extension");
         addSpeedButton.classList.add("hide-yt-extension");
-        setSpeedCustom(value)
+        setSpeedCustom(value);
 
         if (value >= 1) {
           const arr = JSON.parse(localStorage.getItem("speed")) || [];
@@ -223,22 +92,19 @@ function checkElementRendered() {
     containerElement.appendChild(addSpeedButton);
 
     function drawNewSelect() {
-      // Получаем текущие значения скорости из localStorage
+      //Current speed from localStorage
       const speedData = localStorage.getItem("speed");
       const lowSpeedData = localStorage.getItem("lowSpeed");
 
-      // Проверяем наличие значения скорости
       if (speedData) {
         try {
-          // Пытаемся преобразовать данные в массив
           const speedArray = JSON.parse(speedData);
 
-          // Проверяем, содержит ли массив начальные значения
           if (speedArray) {
-            // Очищаем selectSpeed от предыдущих элементов
+            //clear selectSpeed
             selectSpeed.innerHTML = "";
 
-            // Создаем и добавляем элементы option в selectSpeed
+            //create option
             speedArray.forEach((speed) => {
               const option = document.createElement("option");
               option.value = speed;
@@ -246,39 +112,34 @@ function checkElementRendered() {
               selectSpeed.appendChild(option);
             });
           } else {
-            console.log("Начальные значения не установлены или некорректны.");
+            console.log("Start value incorrect.");
           }
         } catch (error) {
-          console.error("Ошибка при разборе данных из localStorage:", error);
+          console.error("Error localStorage:", error);
         }
       } else {
-        console.log("Начальные значения еще не установлены.");
+        console.log("Start value have not installed.");
       }
 
       if (lowSpeedData) {
         try {
-          // Пытаемся преобразовать данные в массив
           const speedArray = JSON.parse(lowSpeedData);
 
-          // Проверяем, содержит ли массив начальные значения
           if (speedArray) {
-            // Создаем и добавляем элементы option в selectSpeed
             speedArray.forEach((speed) => {
               const option = document.createElement("option");
               option.value = speed;
               option.textContent = speed;
               selectSpeed.appendChild(option);
             });
-
-            console.log("Начальные значения уже установлены.");
           } else {
-            console.log("Начальные значения не установлены или некорректны.");
+            console.log("Start value incorrect.");
           }
         } catch (error) {
-          console.error("Ошибка при разборе данных из localStorage:", error);
+          console.error("Error localStorage:", error);
         }
       } else {
-        console.log("Начальные значения еще не установлены.");
+        console.log("Start value have not installed.");
       }
 
       let customSpeed = document.createElement("option");
@@ -288,14 +149,12 @@ function checkElementRendered() {
     }
     drawNewSelect();
 
-    // Выбираем option со значением "1" при первой загрузке страницы
+    //select 1 for first loading page
     selectSpeed.value = "1";
     let selectedOption = selectSpeed.querySelector(
       `option[value="${selectSpeed.value}"]`
     );
     selectedOption.selected = true;
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // create btn
     let customButton = document.createElement("button");
@@ -326,16 +185,6 @@ function checkElementRendered() {
     // Insert our custom container
     titleElement.insertAdjacentElement("afterend", containerElement);
 
-    // Event listener for selectElement change
-    // selectElement.addEventListener("change", function () {
-    //   if (this.value === "add_new_playlist") {
-    //     newOptionInput.classList.remove("hide-yt-extension");
-    //     addOptionButton.classList.remove("hide-yt-extension");
-    //   } else {
-    //     newOptionInput.classList.add("hide-yt-extension");
-    //     addOptionButton.classList.add("hide-yt-extension");
-    //   }
-    // });
     // Event listener for selectSpeed change
     selectSpeed.addEventListener("change", function () {
       if (this.value === "customSpeed") {
@@ -348,13 +197,9 @@ function checkElementRendered() {
         addSpeedButton.classList.add("hide-yt-extension");
       }
     });
-
-    getSelectedOptionValue();
   } else {
-    // Элемент еще не отрисован, запросите следующую анимацию перед перерисовкой
     requestAnimationFrame(checkElementRendered);
   }
 }
 
-// Запускаем проверку отрисовки элемента
 requestAnimationFrame(checkElementRendered);
