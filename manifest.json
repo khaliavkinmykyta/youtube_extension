@@ -11,8 +11,10 @@
   "permissions": [
     "tabs"
   ],
+
   "host_permissions": [
-    "*://*.youtube.com/*"
+    "https://*.youtube.com/*"
+
   ],
   "action": {
     "default_popup": "popup.html",
@@ -23,14 +25,15 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "service.js"
   },
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
-      "js": ["content.js", "scripts/renderMenuYT.js",  "scripts/test1.js", "scripts/changeSpeed.js", "scripts/speedSetting.js"],
+      "js": ["content.js", "scripts/renderMenuYT.js", "scripts/databaseSetting.js", "scripts/changeSpeed.js", "scripts/speedSetting.js"],
       "css": ["styles/youtubeElements.css"]
     }
   ]
-  
 }
+
+
