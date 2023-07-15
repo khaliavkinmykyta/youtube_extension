@@ -49,7 +49,11 @@ function checkElementRendered() {
     let addSpeedButton = document.createElement("button");
     addSpeedButton.classList.add("hide-yt-extension");
     addSpeedButton.textContent = "Add Speed";
-    addSpeedButton.classList.add("button-yt-extension");
+    if (darkTheme) {
+        addSpeedButton.classList.add("button-dark-yt-extension");
+      } else {
+        addSpeedButton.classList.add("button-yt-extension");
+      }
     addSpeedButton.addEventListener("click", function () {
       let input = document.getElementById("newSpeedInput");
       let value = input.value;
@@ -68,24 +72,31 @@ function checkElementRendered() {
         setSpeedCustom(value);
 
         if (value >= 1) {
-          const arr = JSON.parse(localStorage.getItem("speed")) || [];
-
-          arr.push(+value);
-          arr.sort(function (a, b) {
-            return b - a;
-          });
-          localStorage.setItem("speed", JSON.stringify(arr));
-          drawNewSelect();
-        } else {
-          const arr = JSON.parse(localStorage.getItem("lowSpeed")) || [];
-
-          arr.push(+value);
-          arr.sort(function (a, b) {
-            return a - b;
-          });
-          localStorage.setItem("lowSpeed", JSON.stringify(arr));
-          drawNewSelect();
-        }
+            const arr = JSON.parse(localStorage.getItem("speed")) || [];
+          
+            arr.push(+value);
+            arr.sort(function (a, b) {
+              return b - a;
+            });
+            localStorage.setItem("speed", JSON.stringify(arr));
+            drawNewSelect();
+          
+            // Устанавливаем значение select равным только что добавленному значению
+            select.value = value;
+          } else {
+            const arr = JSON.parse(localStorage.getItem("lowSpeed")) || [];
+          
+            arr.push(+value);
+            arr.sort(function (a, b) {
+              return a - b;
+            });
+            localStorage.setItem("lowSpeed", JSON.stringify(arr));
+            drawNewSelect();
+          
+            // Устанавливаем значение select равным только что добавленному значению
+            select.value = value;
+          }
+          
       } else alert("Incorrect value");
     });
 
@@ -165,6 +176,10 @@ function checkElementRendered() {
       customButton.classList.add("button-yt-extension");
     }
     customButton.addEventListener("click", function () {
+        let select = document.getElementById("mySelectSpeed");
+
+        select.value = 1;
+
       setSpeedCustom(1);
     });
     containerElement.appendChild(customButton);
@@ -174,6 +189,7 @@ function checkElementRendered() {
     function testOK() {
       let favorite = localStorage.getItem("favorite");
       additionalButton.textContent = favorite + "x";
+
     }
     testOK();
     additionalButton.classList.add("button-yt-extension");
@@ -185,6 +201,8 @@ function checkElementRendered() {
     additionalButton.addEventListener("click", function () {
       let favorite = localStorage.getItem("favorite");
       setSpeedCustom(favorite);
+      let select = document.getElementById("mySelectSpeed");
+      select.value = favorite;
     });
     containerElement.appendChild(additionalButton);
 
