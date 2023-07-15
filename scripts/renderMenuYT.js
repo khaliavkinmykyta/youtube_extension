@@ -170,7 +170,12 @@ function checkElementRendered() {
     containerElement.appendChild(customButton);
 
     let additionalButton = document.createElement("button");
-    additionalButton.textContent = "2x";
+    additionalButton.id = "additionalButton";
+    function testOK() {
+      let favorite = localStorage.getItem("favorite");
+      additionalButton.textContent = favorite + "x";
+    }
+    testOK();
     additionalButton.classList.add("button-yt-extension");
     if (darkTheme) {
       additionalButton.classList.add("button-dark-yt-extension");
@@ -178,7 +183,8 @@ function checkElementRendered() {
       additionalButton.classList.add("button-yt-extension");
     }
     additionalButton.addEventListener("click", function () {
-      setSpeedCustom(2);
+      let favorite = localStorage.getItem("favorite");
+      setSpeedCustom(favorite);
     });
     containerElement.appendChild(additionalButton);
 

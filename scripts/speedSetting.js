@@ -1,56 +1,20 @@
-/* Set default value speed
-     *
-     *
-     *
-     *
-     *
-     *
-     *  Speed
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     Set default value speed */
+//First default speed
 function setDefaultSpeed() {
   if (localStorage.getItem("speed") == null) {
     localStorage.setItem("speed", JSON.stringify([2, 1.5, 1]));
+    localStorage.setItem("favorite", 2);
   }
 
   if (localStorage.getItem("lowSpeed") == null) {
     localStorage.setItem("lowSpeed", JSON.stringify([0.5]));
   }
 }
-
 setDefaultSpeed();
 
-/* Set default value speed
-     *
-     *
-     *
-     *
-     *
-     *
-     *  Speed
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     Set default value speed */
 function drawSetting() {
-    let darkTheme = false;
+  let darkTheme = false;
   let tema = document.querySelector('[content="rgba(255, 255, 255, 0.98)"]');
-  if (tema) {
-    //   alert("WHITE");
-  } else {
-    //   alert("DARK");
+  if (!tema) {
     darkTheme = true;
   }
 
@@ -70,6 +34,7 @@ function drawSetting() {
   // Получаем значения из localStorage
   let speedData = localStorage.getItem("speed");
   let lowSpeedData = localStorage.getItem("lowSpeed");
+  let favSpeed = localStorage.getItem("favorite");
 
   // Парсим значения из строки JSON
   let speedArray = speedData ? JSON.parse(speedData) : [];
@@ -84,10 +49,17 @@ function drawSetting() {
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    let favButton = document.createElement("button");
+    favButton.textContent = "Favorite";
+    favButton.dataset.value = speed;
+
     if (darkTheme) {
       deleteButton.classList.add("button-dark-yt-extension");
+      favButton.classList.add("button-dark-yt-extension");
     } else {
       deleteButton.classList.add("button-yt-extension");
+      favButton.classList.add("button-yt-extension");
+
     }
 
     deleteButton.addEventListener("click", function () {
@@ -95,30 +67,59 @@ function drawSetting() {
       closeButton.remove();
       drawSetting();
     });
+    favButton.addEventListener("click", function () {
+      localStorage.setItem("favorite", speed);
+      closeButton.remove();
+      drawSetting();
+      rerenderAdditionalButton();
+    });
 
     speedItem.appendChild(deleteButton);
-
+    speedItem.appendChild(favButton);
+    //favorite
+    if (favSpeed == speed) {
+      speedItem.classList.add("favItem");
+    }
     settingContainer.appendChild(speedItem);
   });
 
   // Создаем элементы для каждого значения низкой скорости
   lowSpeedArray.forEach((lowSpeed) => {
     let lowSpeedItem = document.createElement("div");
+    lowSpeedItem.classList.add("speedItem");
+
     lowSpeedItem.textContent = "Low Speed: " + lowSpeed;
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    let favButton = document.createElement("button");
+    favButton.textContent = "Favorite";
     if (darkTheme) {
       deleteButton.classList.add("button-dark-yt-extension");
+      favButton.classList.add("button-dark-yt-extension");
     } else {
       deleteButton.classList.add("button-yt-extension");
+      favButton.classList.add("button-yt-extension");
+
     }
     deleteButton.addEventListener("click", function () {
       removeLowSpeed(lowSpeed);
       drawSetting();
     });
 
+    favButton.addEventListener("click", function () {
+      localStorage.setItem("favorite", lowSpeed);
+      closeButton.remove();
+      drawSetting();
+      rerenderAdditionalButton();
+
+    });
+
     lowSpeedItem.appendChild(deleteButton);
+    lowSpeedItem.appendChild(favButton);
+    if (favSpeed == lowSpeed) {
+      lowSpeedItem.classList.add("favItem");
+    }
 
     settingContainer.appendChild(lowSpeedItem);
   });
@@ -126,34 +127,34 @@ function drawSetting() {
   // Добавляем новый контейнер в родительский элемент
   parentDiv.appendChild(settingContainer);
 
-  // Кнопка "Закрыть"
+  //Close setting
   let closeButton = document.createElement("button");
-  closeButton.textContent = "Закрыть";
+  closeButton.textContent = "Close";
   if (darkTheme) {
-    closeButton.classList.add("button-dark-yt-extension");
+    closeButton.classList.add("button-close-dark-yt-extension");
   } else {
-    closeButton.classList.add("button-yt-extension");
+    closeButton.classList.add("button-close-yt-extension");
   }
   closeButton.addEventListener("click", function () {
     settingContainer.remove();
     closeButton.remove();
   });
 
-  parentDiv.appendChild(closeButton);
+  settingContainer.appendChild(closeButton);
 }
 
+//Remove Spped
 function removeSpeed(speed) {
-    let speedData = localStorage.getItem("speed");
-    if (speedData) {
-      let speedArray = JSON.parse(speedData);
-      let index = speedArray.indexOf(speed);
-      if (index > -1 && speed !== 1) {
-        speedArray.splice(index, 1);
-        localStorage.setItem("speed", JSON.stringify(speedArray));
-      }
+  let speedData = localStorage.getItem("speed");
+  if (speedData) {
+    let speedArray = JSON.parse(speedData);
+    let index = speedArray.indexOf(speed);
+    if (index > -1 && speed !== 1) {
+      speedArray.splice(index, 1);
+      localStorage.setItem("speed", JSON.stringify(speedArray));
     }
   }
-  
+}
 
 function removeLowSpeed(lowSpeed) {
   let lowSpeedData = localStorage.getItem("lowSpeed");
@@ -165,4 +166,11 @@ function removeLowSpeed(lowSpeed) {
       localStorage.setItem("lowSpeed", JSON.stringify(lowSpeedArray));
     }
   }
+}
+
+function rerenderAdditionalButton() {
+    let favorite = localStorage.getItem('favorite')
+    let additionalButton = document.getElementById('additionalButton')
+    
+    additionalButton.textContent = favorite + 'x';
 }
