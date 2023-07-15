@@ -38,8 +38,7 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "js": ["scripts/renderMenuYT.js", "scripts/changeSpeed.js", "scripts/speedSetting.js"],
-      "css": ["styles/youtubeElements.css"],
-      "images": ["images/setting.png"]
+      "css": ["styles/youtubeElements.css"]
     }
   ]
   
