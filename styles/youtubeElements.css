@@ -1,3 +1,9 @@
+.img-setting {
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+}
+
 .hide-yt-extension {
   display: none;
 }
@@ -53,6 +59,8 @@
 .speedItem {
   font-size: 14px;
   margin-right: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .favItem {

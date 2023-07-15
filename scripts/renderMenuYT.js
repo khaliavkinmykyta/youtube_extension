@@ -16,8 +16,15 @@ function checkElementRendered() {
     let containerElement = document.createElement("div");
     containerElement.classList.add("container-yt-extension");
 
-    let mainSettingButton = document.createElement("button");
-    mainSettingButton.textContent = "Setting";
+    let mainSettingButton = document.createElement("img");
+    mainSettingButton.classList.add('img-setting')
+    if (darkTheme) {
+        mainSettingButton.src = "https://cdn2.iconfinder.com/data/icons/tools-flat-v-1-free/129/wrench_tools_-512.png";
+      } else {
+        mainSettingButton.src = "https://cdn2.iconfinder.com/data/icons/tools-flat-v-1-free/129/wrench_tools_-512.png";
+      }
+    
+
     if (darkTheme) {
       mainSettingButton.classList.add("button-dark-yt-extension");
     } else {
@@ -50,10 +57,10 @@ function checkElementRendered() {
     addSpeedButton.classList.add("hide-yt-extension");
     addSpeedButton.textContent = "Add Speed";
     if (darkTheme) {
-        addSpeedButton.classList.add("button-dark-yt-extension");
-      } else {
-        addSpeedButton.classList.add("button-yt-extension");
-      }
+      addSpeedButton.classList.add("button-dark-yt-extension");
+    } else {
+      addSpeedButton.classList.add("button-yt-extension");
+    }
     addSpeedButton.addEventListener("click", function () {
       let input = document.getElementById("newSpeedInput");
       let value = input.value;
@@ -72,31 +79,30 @@ function checkElementRendered() {
         setSpeedCustom(value);
 
         if (value >= 1) {
-            const arr = JSON.parse(localStorage.getItem("speed")) || [];
-          
-            arr.push(+value);
-            arr.sort(function (a, b) {
-              return b - a;
-            });
-            localStorage.setItem("speed", JSON.stringify(arr));
-            drawNewSelect();
-          
-            // Устанавливаем значение select равным только что добавленному значению
-            select.value = value;
-          } else {
-            const arr = JSON.parse(localStorage.getItem("lowSpeed")) || [];
-          
-            arr.push(+value);
-            arr.sort(function (a, b) {
-              return a - b;
-            });
-            localStorage.setItem("lowSpeed", JSON.stringify(arr));
-            drawNewSelect();
-          
-            // Устанавливаем значение select равным только что добавленному значению
-            select.value = value;
-          }
-          
+          const arr = JSON.parse(localStorage.getItem("speed")) || [];
+
+          arr.push(+value);
+          arr.sort(function (a, b) {
+            return b - a;
+          });
+          localStorage.setItem("speed", JSON.stringify(arr));
+          drawNewSelect();
+
+          // Устанавливаем значение select равным только что добавленному значению
+          select.value = value;
+        } else {
+          const arr = JSON.parse(localStorage.getItem("lowSpeed")) || [];
+
+          arr.push(+value);
+          arr.sort(function (a, b) {
+            return a - b;
+          });
+          localStorage.setItem("lowSpeed", JSON.stringify(arr));
+          drawNewSelect();
+
+          // Устанавливаем значение select равным только что добавленному значению
+          select.value = value;
+        }
       } else alert("Incorrect value");
     });
 
@@ -176,9 +182,9 @@ function checkElementRendered() {
       customButton.classList.add("button-yt-extension");
     }
     customButton.addEventListener("click", function () {
-        let select = document.getElementById("mySelectSpeed");
+      let select = document.getElementById("mySelectSpeed");
 
-        select.value = 1;
+      select.value = 1;
 
       setSpeedCustom(1);
     });
@@ -189,7 +195,6 @@ function checkElementRendered() {
     function testOK() {
       let favorite = localStorage.getItem("favorite");
       additionalButton.textContent = favorite + "x";
-
     }
     testOK();
     additionalButton.classList.add("button-yt-extension");

@@ -46,10 +46,23 @@ function drawSetting() {
 
     speedItem.textContent = "Speed: " + speed + "\u00A0\u00A0\u00A0";
 
-    let deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    let favButton = document.createElement("button");
-    favButton.textContent = "Favorite";
+    let deleteButton = document.createElement("img");
+    deleteButton.classList.add('img-setting')
+    if (darkTheme) {
+        deleteButton.src = "https://cdn0.iconfinder.com/data/icons/graphic-design-tools-5/128/_eraser-512.png";
+      } else {
+        deleteButton.src = "https://cdn0.iconfinder.com/data/icons/graphic-design-tools-5/128/_eraser-512.png";
+      }
+
+
+    let favButton = document.createElement("img");
+    favButton.classList.add('img-setting')
+    if (darkTheme) {
+        favButton.src = "https://cdn1.iconfinder.com/data/icons/basic-22/512/1032_c_play_c-1024.png";
+      } else {
+        favButton.src = "https://cdn1.iconfinder.com/data/icons/basic-22/512/1032_c_play_c-1024.png";
+      }
+
     favButton.dataset.value = speed;
 
     if (darkTheme) {
@@ -89,10 +102,21 @@ function drawSetting() {
 
     lowSpeedItem.textContent = "Low Speed: " + lowSpeed;
 
-    let deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    let favButton = document.createElement("button");
-    favButton.textContent = "Favorite";
+    let deleteButton = document.createElement("img");
+    deleteButton.classList.add('img-setting')
+    if (darkTheme) {
+        deleteButton.src = "https://cdn0.iconfinder.com/data/icons/graphic-design-tools-5/128/_eraser-512.png";
+      } else {
+        deleteButton.src = "https://cdn0.iconfinder.com/data/icons/graphic-design-tools-5/128/_eraser-512.png";
+      }
+
+    let favButton = document.createElement("img");
+    favButton.classList.add('img-setting')
+    if (darkTheme) {
+        favButton.src = "https://cdn1.iconfinder.com/data/icons/basic-22/512/1032_c_play_c-1024.png";
+      } else {
+        favButton.src = "https://cdn1.iconfinder.com/data/icons/basic-22/512/1032_c_play_c-1024.png";
+      }
     if (darkTheme) {
       deleteButton.classList.add("button-dark-yt-extension");
       favButton.classList.add("button-dark-yt-extension");

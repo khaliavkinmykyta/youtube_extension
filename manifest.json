@@ -12,7 +12,12 @@
   "permissions": [
     "tabs"
   ],
-
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*"],
+      "matches": ["*://*/*"]
+    }
+  ],
   "host_permissions": [
     "https://*.youtube.com/*",
     "https://*.buymeacoffee.com/khaliavkin"
@@ -33,7 +38,8 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "js": ["scripts/renderMenuYT.js", "scripts/changeSpeed.js", "scripts/speedSetting.js"],
-      "css": ["styles/youtubeElements.css"]
+      "css": ["styles/youtubeElements.css"],
+      "images": ["images/setting.png"]
     }
   ]
   
