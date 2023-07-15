@@ -20,27 +20,26 @@ function drawSetting() {
 
   let parentDiv = document.getElementsByClassName("container-yt-extension")[0];
 
-  // Удаляем предыдущий контейнер со значениями, если он существует
+  //Delete prev container 
   let existingContainer = document.getElementById("settingContainer");
   if (existingContainer) {
     existingContainer.remove();
   }
 
-  // Создаем новый контейнер
+  //new settingContainer
   let settingContainer = document.createElement("div");
 
   settingContainer.id = "settingContainer";
 
-  // Получаем значения из localStorage
+  // All speed from localStorage
   let speedData = localStorage.getItem("speed");
   let lowSpeedData = localStorage.getItem("lowSpeed");
   let favSpeed = localStorage.getItem("favorite");
 
-  // Парсим значения из строки JSON
   let speedArray = speedData ? JSON.parse(speedData) : [];
   let lowSpeedArray = lowSpeedData ? JSON.parse(lowSpeedData) : [];
 
-  // Создаем элементы для каждого значения скорости
+  //List of speed
   speedArray.forEach((speed) => {
     let speedItem = document.createElement("div");
     speedItem.classList.add("speedItem");
@@ -83,7 +82,7 @@ function drawSetting() {
     settingContainer.appendChild(speedItem);
   });
 
-  // Создаем элементы для каждого значения низкой скорости
+  //List of Low speed
   lowSpeedArray.forEach((lowSpeed) => {
     let lowSpeedItem = document.createElement("div");
     lowSpeedItem.classList.add("speedItem");
@@ -124,7 +123,6 @@ function drawSetting() {
     settingContainer.appendChild(lowSpeedItem);
   });
 
-  // Добавляем новый контейнер в родительский элемент
   parentDiv.appendChild(settingContainer);
 
   //Close setting
@@ -143,7 +141,7 @@ function drawSetting() {
   settingContainer.appendChild(closeButton);
 }
 
-//Remove Spped
+//Remove Speed
 function removeSpeed(speed) {
   let speedData = localStorage.getItem("speed");
   if (speedData) {
@@ -155,7 +153,7 @@ function removeSpeed(speed) {
     }
   }
 }
-
+//Remove LowSpeed
 function removeLowSpeed(lowSpeed) {
   let lowSpeedData = localStorage.getItem("lowSpeed");
   if (lowSpeedData) {

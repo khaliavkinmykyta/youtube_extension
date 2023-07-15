@@ -32,7 +32,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
-      "js": ["scripts/renderMenuYT.js", "scripts/databaseSetting.js", "scripts/changeSpeed.js", "scripts/speedSetting.js"],
+      "js": ["scripts/renderMenuYT.js", "scripts/changeSpeed.js", "scripts/speedSetting.js"],
       "css": ["styles/youtubeElements.css"]
     }
   ]
